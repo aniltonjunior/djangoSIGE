@@ -1,0 +1,1 @@
+web: gunicorn sige_kheiron.wsgi
