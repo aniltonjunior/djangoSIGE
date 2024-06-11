@@ -9,7 +9,7 @@ services:
     volumes:
       - ./database:/var/lib/postgresql/data
   gunicorn:
-    image: djangosige
+    build: .
     command: gunicorn -b 0.0.0.0:8000 djangosige.wsgi:application
     environment:
       - SECRET_KEY=0#pny4oox9s#+#5dkde25dj79b-o^sdbz4kiumg#e1qx3ky
@@ -27,6 +27,6 @@ services:
       - ./djangosige/static/:/opt/djangoSIGE/static/
       - ./djangosige/media/:/opt/djangoSIGE/media/
     ports:
-      - 80:80
+      - "80:80"
     links:
       - gunicorn

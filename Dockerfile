@@ -1,12 +1,11 @@
-FROM alpine:3.7
-MAINTAINER lukasgarcya@hotmail.com
+FROM python:3.6-slim
+ENV TZ=America/Sao_Paulo
 RUN mkdir -p /opt/djangoSIGE/
 WORKDIR /opt/djangoSIGE/
 COPY requirements.txt /opt/djangoSIGE/
-RUN apk add --no-cache python3 python3-dev \
-    py3-cffi zlib-dev gcc jpeg-dev \
-    linux-headers libressl-dev \
-    libxml2-dev libxslt-dev \
-    musl-dev postgresql-dev \
+RUN apt update && apt upgrade -y && \
+    apt install -y gcc libpq-dev python-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libc-dev musl-dev \
+    && pip3 install --upgrade pip \
     && pip3 install -r requirements.txt \
+    && pip3 install --upgrade setuptools \
     && pip3 install gunicorn psycopg2
